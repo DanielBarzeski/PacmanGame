@@ -49,13 +49,13 @@ public class Board extends JPanel implements Runnable {
     }
 
     private void loadImages() {
-
-        down = new ImageIcon("/src/images/down.gif").getImage();
-        up = new ImageIcon("/src/images/up.gif").getImage();
-        left = new ImageIcon("/src/images/left.gif").getImage();
-        right = new ImageIcon("/src/images/right.gif").getImage();
-        ghost = new ImageIcon("/src/images/ghost.gif").getImage();
-        win = new ImageIcon("/src/images/illustration-of-a-group-of-kids-celebrating-their-victory-HXYP6N.jpg").getImage();
+        down = new ImageIcon("images\\down.gif").getImage();
+        up = new ImageIcon("images\\up.gif").getImage();
+        left = new ImageIcon("images\\left.gif").getImage();
+        right = new ImageIcon("images\\right.gif").getImage();
+        ghost = new ImageIcon("images\\ghost.gif").getImage();
+        win = new ImageIcon("images" +
+                "\\illustration-of-a-group-of-kids-celebrating-their-victory-HXYP6N.jpg").getImage();
     }
 
     private void initBoard() {

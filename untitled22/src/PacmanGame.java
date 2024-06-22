@@ -19,7 +19,7 @@ public class PacmanGame {
         int wait = 0;
         while (this.getWindow().getBoard().isInGame()){
             try {
-                File soundFile = new File("C:\\Users\\danie\\OneDrive\\שולחן העבודה\\images\\pacman_beginning.wav");
+                File soundFile = new File("images\\pacman_beginning.wav");
                 Clip clip = AudioSystem.getClip();
                 clip.open(AudioSystem.getAudioInputStream(soundFile));
                 clip.start();

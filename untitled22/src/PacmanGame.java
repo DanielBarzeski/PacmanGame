@@ -28,6 +28,7 @@ public class PacmanGame {
                     Thread.sleep(1000);
                     wait++;
                 }
+                Thread.sleep(500);
             } catch (Exception e) {
                 System.out.println("Error playing sound: " + e.getMessage());
             }

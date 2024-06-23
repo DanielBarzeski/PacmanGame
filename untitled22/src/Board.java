@@ -9,6 +9,7 @@ import java.util.Random;
 public class Board extends JPanel implements Runnable {
     private final int TILE_SIZE = 26; // min resolution = 9, max = 28 (preferred = 26)
     private final int speed = 5; // max speed = 10, min = 1 (preferred speed = 5)
+    private final boolean showInfo = false;
     private int X_TILES, Y_TILES, SCREEN_HEIGHT, SCREEN_WIDTH;
     private Image down, ghost, up, left, right, win;
 
@@ -31,7 +32,7 @@ public class Board extends JPanel implements Runnable {
     private int[] qG ;
 
     //            up  down  right  left
-    private boolean[] P = {true, true, true, true};
+    private final boolean[] P = {true, true, true, true};
 
     public int getSCREEN_HEIGHT() {
         return SCREEN_HEIGHT;
@@ -49,6 +50,7 @@ public class Board extends JPanel implements Runnable {
     }
 
     private void loadImages() {
+
         down = new ImageIcon("images\\down.gif").getImage();
         up = new ImageIcon("images\\up.gif").getImage();
         left = new ImageIcon("images\\left.gif").getImage();
@@ -393,10 +395,12 @@ public class Board extends JPanel implements Runnable {
             }
             if (binarySearch(mapOrganizer[yP][xP])[6] == 1) {
                 mapOrganizer[yP][xP] -= 32;
-                // System.out.println(this);
+                if (showInfo)
+                    System.out.println(this);
                 score += 10;
             }
-            // System.out.println(xP+", "+yP);
+            if (showInfo)
+               System.out.println("pacman place (index): "+xP+", "+yP);
             x1P = xP;
             y1P = yP;
         }
@@ -478,7 +482,6 @@ public class Board extends JPanel implements Runnable {
         g.drawImage(win,  1,  1, SCREEN_WIDTH , SCREEN_HEIGHT , this);
     }
     private void drawPacman(Graphics g) {
-        g.setColor(Color.yellow);
         if (P[2])
             g.drawImage(right, pacmanX + 2, pacmanY + 2, TILE_SIZE - 1, TILE_SIZE - 1, this);
         if (P[0])
@@ -534,7 +537,8 @@ public class Board extends JPanel implements Runnable {
         g.setColor(Color.green);
         for (int i = 0; i < SCREEN_HEIGHT; i += TILE_SIZE) {
             for (int j = 0; j < SCREEN_WIDTH; j += TILE_SIZE) {
-                // g.drawRoundRect(j+1,i+1,TILE_SIZE-1,TILE_SIZE-1,6,6);
+                if (showInfo)
+                    g.drawRoundRect(j+1,i+1,TILE_SIZE-1,TILE_SIZE-1,6,6);
             }
         }
 
@@ -573,7 +577,6 @@ public class Board extends JPanel implements Runnable {
             }
             repaint();
             try {
-
                 Thread.sleep(1000 / speed);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -624,3 +627,4 @@ public class Board extends JPanel implements Runnable {
         }
     }
 }
+

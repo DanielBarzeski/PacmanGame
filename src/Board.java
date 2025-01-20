@@ -116,11 +116,7 @@ public class Board {
             pacman.draw(g);
         drawWalls(g);
         if (Game.isFINISHED()) {
-//            if (won)
-//                g.drawImage(winning, Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 60, 100, 100, null);
-//            else
             g.drawImage(gameOver, Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 60, 100, 100, null);
-
         }
     }
 
@@ -302,6 +298,8 @@ public class Board {
         }
         if (next != null)
             goToPacman(next, ghost);
+        else
+            ghost.stay();
     }
 
     private void goToPacman(Point location, Character ghost) {

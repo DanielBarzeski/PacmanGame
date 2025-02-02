@@ -7,15 +7,6 @@ public class GameDisplay extends JPanel implements Runnable {
         setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
         setBackground(Color.black);
         new Thread(this).start();
-        new Thread(() -> {
-            while (true) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException ignored) {
-                }
-                repaint();
-            }
-        }).start();
         setupKeyBindings();
     }
 
@@ -53,12 +44,18 @@ public class GameDisplay extends JPanel implements Runnable {
     }
     @Override
     public void run() {
+        int counter = 0;
         while (true) {
             try {
-                Thread.sleep(300);
+                Thread.sleep(100);
             } catch (InterruptedException ignored) {
             }
-            Game.CONTROL_BOARD().update();
+            if (counter == 3) {
+                Game.CONTROL_BOARD().update();
+                counter = 0;
+            }
+            repaint();
+            counter++;
         }
     }
 }

@@ -1,0 +1,53 @@
+import java.awt.*;
+import java.util.ArrayList;
+
+public class BoardMap {
+    protected final char[][] map;
+    protected final Pacman pacman;
+    protected final ArrayList<Ghost> ghosts;
+    protected final Border border;
+    protected final Food food;
+
+    public BoardMap(char[][] map) {
+        this.map = map;
+        this.border = new Border();
+        this.ghosts = new ArrayList<>();
+        this.food = new Food();
+        Point point = new Point();
+        scanMap(point);
+        this.pacman = new Pacman(point.x, point.y);
+    }
+
+    private void scanMap(Point point) {
+        for (int row = 0; row < map.length; row++) {
+            for (int col = 0; col < map[0].length; col++) {
+                if (map[row][col] == '0') /// every zero represent an apple.
+                    food.apples.add(new Point(col, row));
+                else if (map[row][col] == '1') /// every one represent a wall.
+                    border.walls.add(new Point(col, row));
+                else if (map[row][col] == '2') /// every two represent a ghost.
+                    ghosts.add(new Ghost(col, row, (new Color(75 + (int) (Math.random() * 156), 75 + (int) (Math.random() * 156), 75 + (int) (Math.random() * 156)))));
+                else if (map[row][col] == '4') /// four represent a pacman.
+                    point.move(col, row);
+                else if (map[row][col] == '5') /// five represent a cherry.
+                    food.cherries.add(new Point(col, row));
+                /// every three represent nothing.
+            }
+        }
+    }
+
+    public boolean outOfMap(Point point) {
+        return (point.x < 0 || point.y < 0 || point.x >= map[0].length || point.y >= map.length);
+    }
+
+    public void adjustToMap(Point location) {
+        if (location.x < 0)
+            location.x = map[0].length - 1;
+        if (location.y < 0)
+            location.y = map.length - 1;
+        if (location.x >= map[0].length)
+            location.x = 0;
+        if (location.y >= map.length)
+            location.y = 0;
+    }
+}

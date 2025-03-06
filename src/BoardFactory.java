@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class BoardFactory extends BoardMap {
 
-    public BoardFactory(char[][] map) {
+    public BoardFactory(byte[][] map) {
         super(map);
     }
 

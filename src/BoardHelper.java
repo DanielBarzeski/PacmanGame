@@ -7,7 +7,7 @@ import java.util.*;
 
 public class BoardHelper extends BoardFactory {
 
-    public BoardHelper(char[][] map) {
+    public BoardHelper(byte[][] map) {
         super(map);
     }
 

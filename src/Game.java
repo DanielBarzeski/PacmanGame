@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Game {
     private static boolean FINISHED, PAUSED, WON;
-    private final static char[][] MAP = readCharArrayFromFile();
+    private final static byte[][] MAP = readByteArrayFromFile();
     public final static int CELL_SIZE = 17,
             WIDTH = MAP[0].length * CELL_SIZE,
             HEIGHT = MAP.length * CELL_SIZE;
@@ -54,23 +54,24 @@ public class Game {
         return BOARD;
     }
 
-    private static char[][] readCharArrayFromFile() {
-        ArrayList<char[]> lines = new ArrayList<>();
+    private static byte[][] readByteArrayFromFile() {
+        ArrayList<byte[]> lines = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader("levels/level_" + LEVEL))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                lines.add(line.toCharArray());
+                lines.add(line.getBytes());
             }
         } catch (IOException e) {
             System.out.println("Error reading file: " + "levels/level_" + LEVEL);
             System.exit(0);
         }
-        char[][] charArray = new char[lines.size()][];
+
+        byte[][] byteArray = new byte[lines.size()][];
         for (int i = 0; i < lines.size(); i++) {
-            charArray[i] = lines.get(i);
+            byteArray[i] = lines.get(i);
         }
 
-        return charArray;
+        return byteArray;
     }
 }

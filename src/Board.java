@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class Board extends BoardHelper {
-    public Board(char[][] map) {
+    public Board(byte[][] map) {
         super(map);
     }
 

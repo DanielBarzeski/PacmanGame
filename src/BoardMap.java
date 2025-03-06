@@ -2,13 +2,13 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class BoardMap {
-    protected final char[][] map;
+    protected final byte[][] map;
     protected final Pacman pacman;
     protected final ArrayList<Ghost> ghosts;
     protected final Border border;
     protected final Food food;
 
-    public BoardMap(char[][] map) {
+    public BoardMap(byte[][] map) {
         this.map = map;
         this.border = new Border();
         this.ghosts = new ArrayList<>();

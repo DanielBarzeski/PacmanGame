@@ -6,7 +6,7 @@ public class Pacman extends Character {
 
     public Pacman(int startX, int startY) {
         super(startX, startY);
-        this.newDirection = new Point(startX, startY);
+        stay();
         life = 3;
         setSprite(Picture.PACMAN);
     }

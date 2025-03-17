@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 
 public class GameDisplay extends JPanel {
     public GameDisplay() {
-        setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
         setBackground(Color.black);
         run();
         setupKeyBindings();
@@ -45,6 +44,8 @@ public class GameDisplay extends JPanel {
         final int[] counter = {0, 0};
         new Timer(80, e -> {
             if (!Game.isFINISHED() && !Game.isPAUSED()) {
+                setPreferredSize(new Dimension(Game.getWIDTH(), Game.getHEIGHT()));
+                revalidate();
                 Game.CONTROL_BOARD().updateRules();
                 if (counter[0] == 4) {
                     Game.CONTROL_BOARD().updateFood();

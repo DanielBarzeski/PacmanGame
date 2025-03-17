@@ -5,15 +5,15 @@ import java.util.ArrayList;
 
 public class Game {
     private static boolean FINISHED, PAUSED, WON;
-    private final static byte[][] MAP = readByteArrayFromFile();
-    public final static int CELL_SIZE = 17,
-            WIDTH = MAP[0].length * CELL_SIZE,
-            HEIGHT = MAP.length * CELL_SIZE;
-    public final static int LEVEL = 2; // max 4
+    public static final int CELL_SIZE = 17;
+    private static int WIDTH, HEIGHT, LEVEL; // max 4
     private static Board BOARD;
 
     public static void START() {
-        BOARD = new Board(MAP);
+        byte[][] map = readByteArrayFromFile();
+        WIDTH = map[0].length * CELL_SIZE;
+        HEIGHT = map.length * CELL_SIZE;
+        BOARD = new Board(map);
         PAUSED = false;
         FINISHED = false;
         WON = false;
@@ -56,7 +56,6 @@ public class Game {
 
     private static byte[][] readByteArrayFromFile() {
         ArrayList<byte[]> lines = new ArrayList<>();
-
         try (BufferedReader reader = new BufferedReader(new FileReader("levels/level_" + LEVEL))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -73,5 +72,22 @@ public class Game {
         }
 
         return byteArray;
+    }
+
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public static int getLEVEL() {
+        return LEVEL;
+    }
+
+    public static void setLEVEL(int level) {
+        if (level >= 0 && level <= 4)
+            Game.LEVEL = level;
     }
 }

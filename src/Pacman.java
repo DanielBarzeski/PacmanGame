@@ -79,6 +79,5 @@ public class Pacman extends Character {
         return getLocation().equals(ghost.getLocation());
     }
 
-
 }
 

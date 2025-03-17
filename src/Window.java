@@ -11,10 +11,11 @@ public class Window extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         JPanel display = new JPanel();
         display.setBackground(Color.blue.darker().darker());
-        display.setPreferredSize(new Dimension(Math.max(450, Game.WIDTH) + 10, Game.HEIGHT + 40 + 15));
+        display.setPreferredSize(new Dimension(750, 640));
         display.setLayout(new FlowLayout());
+        Game.setLEVEL(2);
         Game.START();
-        display.add(new MenuDisplay(450, 40));
+        display.add(new MenuDisplay(600, 40));
         display.add(new GameDisplay());
         add(display);
         pack();

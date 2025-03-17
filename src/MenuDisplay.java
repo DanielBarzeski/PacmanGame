@@ -8,14 +8,6 @@ public class MenuDisplay extends JPanel {
         setLayout(new FlowLayout(FlowLayout.LEFT));
         setPreferredSize(new Dimension(width, height));
         setBackground(Color.green);
-        JButton restart = new JButton("restart");
-        restart.setBackground(Color.orange);
-        restart.addActionListener(e -> {
-            Game.START();
-            revalidate();
-            repaint();
-        });
-        add(restart);
         pause = new JButton();
         pause.setBackground(Color.orange);
         pause.addActionListener(e -> {
@@ -24,6 +16,29 @@ public class MenuDisplay extends JPanel {
             else
                 Game.PAUSE();
         });
+        JButton restart = new JButton("restart");
+        restart.setBackground(Color.orange);
+        restart.addActionListener(e -> {
+            Game.START();
+            pause.setVisible(true);
+            revalidate();
+            repaint();
+        });
+        JButton last = new JButton("last");
+        last.setBackground(Color.orange);
+        last.addActionListener(e -> {
+            Game.setLEVEL(Game.getLEVEL() - 1);
+            restart.doClick();
+        });
+        JButton next = new JButton("next");
+        next.setBackground(Color.orange);
+        next.addActionListener(e -> {
+            Game.setLEVEL(Game.getLEVEL() + 1);
+            restart.doClick();
+        });
+        add(restart);
+        add(last);
+        add(next);
         add(pause);
         run();
     }
@@ -37,7 +52,7 @@ public class MenuDisplay extends JPanel {
     public void run() {
         new Timer(100, e -> {
             if (Game.isFINISHED())
-                pause.setText("unavailable");
+                pause.setVisible(false);
             else if (Game.isPAUSED()) {
                 pause.setText("continue");
             } else {

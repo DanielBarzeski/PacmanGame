@@ -8,11 +8,11 @@ public class Ghost extends Character {
     private static int SCARED_TIME;
     private static boolean SCARED;
 
-    public Ghost(int startX, int startY, Color color) {
+    public Ghost(int startX, int startY) {
         super(startX, startY);
-        this.color = color;
+        this.color = Picture.randomColor();
+        this.sprite = null;
         SCARED_TIME = -1;
-        sprite = null;
         SCARED = false;
         changeSprite(Picture.GHOST, true);
     }
@@ -65,18 +65,18 @@ public class Ghost extends Character {
     }
 
     public void draw(Graphics g) {
-        getSpriteBounds().x += 16;
-        if (getSpriteBounds().x == getSprite().getWidth())
-            getSpriteBounds().x = 0;
+        spriteBounds.x += 16;
+        if (spriteBounds.x == getSprite().getWidth())
+            spriteBounds.x = 0;
         if (getCurrentDirection().y == -1)
-            getSpriteBounds().y = 0;
+            spriteBounds.y = 0;
         else if ((getCurrentDirection().x == 1 || getCurrentDirection().x == 0) && getCurrentDirection().y == 0)
-            getSpriteBounds().y = 16;
+            spriteBounds.y = 16;
         else if (getCurrentDirection().y == 1)
-            getSpriteBounds().y = 32;
+            spriteBounds.y = 32;
         else if (getCurrentDirection().x == -1)
-            getSpriteBounds().y = 48;
-        g.drawImage(getSprite().getSubimage(getSpriteBounds().x, getSpriteBounds().y, getSpriteBounds().width, getSpriteBounds().height),
+            spriteBounds.y = 48;
+        g.drawImage(getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
                 getLocation().x * Game.CELL_SIZE, getLocation().y * Game.CELL_SIZE,
                 Game.CELL_SIZE, Game.CELL_SIZE, null);
     }
@@ -97,5 +97,4 @@ public class Ghost extends Character {
                 setCurrentDirection(new Point(0, -1));
         }
     }
-
 }

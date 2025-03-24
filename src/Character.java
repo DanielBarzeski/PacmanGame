@@ -6,14 +6,14 @@ public class Character {
     private final Point startPoint;
     private Point location, currentDirection;
     private BufferedImage sprite;
-    private final Rectangle spriteBounds;
+    protected final Rectangle spriteBounds;
 
     public Character(int startX, int startY) {
         this.startPoint = new Point(startX, startY);
         this.location = new Point(startX, startY);
         this.currentDirection = new Point();
-        spriteBounds = new Rectangle(16, 16, 16, 16);
-        run = true;
+        this.spriteBounds = new Rectangle(16, 16, 16, 16);
+        this.run = true;
     }
 
     public boolean isRunning() {
@@ -50,10 +50,6 @@ public class Character {
 
     protected BufferedImage getSprite() {
         return sprite;
-    }
-
-    protected Rectangle getSpriteBounds() {
-        return spriteBounds;
     }
 
     protected void setSprite(BufferedImage sprite) {

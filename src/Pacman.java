@@ -20,21 +20,21 @@ public class Pacman extends Character {
     }
 
     public void draw(Graphics g) {
-        getSpriteBounds().x += 16;
-        if (getSpriteBounds().x == getSprite().getWidth())
-            getSpriteBounds().x = 0;
+        spriteBounds.x += 16;
+        if (spriteBounds.x == getSprite().getWidth())
+            spriteBounds.x = 0;
         if (getCurrentDirection().equals(new Point())) {
-            getSpriteBounds().y = 0;
-            getSpriteBounds().x = 0;
+            spriteBounds.y = 0;
+            spriteBounds.x = 0;
         } else if (getCurrentDirection().y == -1)
-            getSpriteBounds().y = 0;
+            spriteBounds.y = 0;
         else if (getCurrentDirection().x == 1 && getCurrentDirection().y == 0)
-            getSpriteBounds().y = 16;
+            spriteBounds.y = 16;
         else if (getCurrentDirection().y == 1)
-            getSpriteBounds().y = 32;
+            spriteBounds.y = 32;
         else if (getCurrentDirection().x == -1)
-            getSpriteBounds().y = 48;
-        g.drawImage(getSprite().getSubimage(getSpriteBounds().x, getSpriteBounds().y, getSpriteBounds().width, getSpriteBounds().height),
+            spriteBounds.y = 48;
+        g.drawImage(getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
                 getLocation().x * Game.CELL_SIZE, getLocation().y * Game.CELL_SIZE,
                 Game.CELL_SIZE + 1, Game.CELL_SIZE + 1, null);
 
@@ -78,6 +78,5 @@ public class Pacman extends Character {
     public boolean collision(Ghost ghost) {
         return getLocation().equals(ghost.getLocation());
     }
-
 }
 

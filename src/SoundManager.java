@@ -6,23 +6,23 @@ import java.io.File;
 
 public class SoundManager {
     private static final Clip
-            backgroundMusic = loadSound("pacman_beginning.wav"),
-            munchSound = loadSound("pacman_eating.wav"),
-            eatingFruitSound = loadSound("pacman_eatFruit.wav"),
-            eatingGhostSound = loadSound("pacman_eatGhost.wav"),
-            deathSound = loadSound("pacman_death.wav");
+            backgroundMusic = loadSound("pacman_beginning"),
+            munchSound = loadSound("pacman_eating"),
+            eatingFruitSound = loadSound("pacman_eatFruit"),
+            eatingGhostSound = loadSound("pacman_eatGhost"),
+            deathSound = loadSound("pacman_death");
 
     private static Clip loadSound(String fileName) {
         try {
-            File file = new File("audio/" + fileName);
+            File file = new File("audio/" + fileName + ".wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
             return clip;
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            System.out.println(fileName + " sound does no exist.");
+            return null;
         }
-        System.out.println(fileName + " sound does no exist.");
-        return null;
     }
 
     public static void playBackgroundMusic() {

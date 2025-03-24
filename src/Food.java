@@ -7,10 +7,10 @@ public class Food {
     private Thread timer;
 
     public Food() {
-        apples = new ArrayList<>();
-        cherries = new ArrayList<>();
-        score = 0;
-        timer = null;
+        this.apples = new ArrayList<>();
+        this.cherries = new ArrayList<>();
+        this.score = 0;
+        this.timer = null;
     }
 
     public void draw(Graphics g) {

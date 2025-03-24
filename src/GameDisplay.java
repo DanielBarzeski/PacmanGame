@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class GameDisplay extends JPanel {
+    private static int WIDTH, HEIGHT;
+
     public GameDisplay() {
         setBackground(Color.black);
         run();
@@ -13,10 +15,10 @@ public class GameDisplay extends JPanel {
         InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap actionMap = getActionMap();
         Object[][] keyActions = {
-                {"LEFT", "moveLeft", (Runnable) () -> Game.CONTROL_BOARD().pacman.goLeft()},
-                {"RIGHT", "moveRight", (Runnable) () -> Game.CONTROL_BOARD().pacman.goRight()},
-                {"UP", "moveUp", (Runnable) () -> Game.CONTROL_BOARD().pacman.goUp()},
-                {"DOWN", "moveDown", (Runnable) () -> Game.CONTROL_BOARD().pacman.goDown()}
+                {"LEFT", "moveLeft", (Runnable) () -> Game.board().pacman.goLeft()},
+                {"RIGHT", "moveRight", (Runnable) () -> Game.board().pacman.goRight()},
+                {"UP", "moveUp", (Runnable) () -> Game.board().pacman.goUp()},
+                {"DOWN", "moveDown", (Runnable) () -> Game.board().pacman.goDown()}
         };
 
         for (Object[] keyAction : keyActions) {
@@ -27,7 +29,7 @@ public class GameDisplay extends JPanel {
             actionMap.put(actionName, new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (!Game.isFINISHED() && !Game.isPAUSED() && Game.CONTROL_BOARD().pacman.isRunning())
+                    if (!Game.isFINISHED() && !Game.isPAUSED() && Game.board().pacman.isRunning())
                         action.run();
                 }
             });
@@ -37,29 +39,47 @@ public class GameDisplay extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Game.CONTROL_BOARD().drawGame(g);
+        Game.board().drawGame(g);
     }
 
     public void run() {
         final int[] counter = {0, 0};
         new Timer(80, e -> {
-            if (!Game.isFINISHED() && !Game.isPAUSED()) {
-                setPreferredSize(new Dimension(Game.getWIDTH(), Game.getHEIGHT()));
-                revalidate();
-                Game.CONTROL_BOARD().updateRules();
-                if (counter[0] == 4) {
-                    Game.CONTROL_BOARD().updateFood();
-                    Game.CONTROL_BOARD().movePacman();
-                    counter[0] = 0;
-                }
-                if (counter[1] == 9) {
-                    Game.CONTROL_BOARD().moveGhosts();
-                    counter[1] = 0;
-                }
-                counter[0]++;
-                counter[1]++;
-            }
+            update(counter);
             repaint();
         }).start();
+    }
+    private void update(int[] counter){
+        if (!Game.isFINISHED() && !Game.isPAUSED()) {
+            setPreferredSize(new Dimension(WIDTH, HEIGHT));
+            revalidate();
+            Game.board().updateRules();
+            if (counter[0] == 4) {
+                Game.board().updateFood();
+                Game.board().movePacman();
+                counter[0] = 0;
+            }
+            if (counter[1] == 7) {
+                Game.board().moveGhosts();
+                counter[1] = 0;
+            }
+            counter[0]++;
+            counter[1]++;
+        }
+    }
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    public static void setWIDTH(int WIDTH) {
+        GameDisplay.WIDTH = WIDTH;
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public static void setHEIGHT(int HEIGHT) {
+        GameDisplay.HEIGHT = HEIGHT;
     }
 }

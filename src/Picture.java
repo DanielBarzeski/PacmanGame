@@ -24,6 +24,9 @@ public class Picture {
             return null;
         }
     }
+    public static Color randomColor() {
+        return new Color(75 + (int) (Math.random() * 156), 75 + (int) (Math.random() * 156), 75 + (int) (Math.random() * 156));
+    }
 
     public static BufferedImage replaceColor(BufferedImage image, Color replacement) {
         int width = image.getWidth();

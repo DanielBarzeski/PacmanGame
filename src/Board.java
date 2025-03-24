@@ -28,8 +28,8 @@ public class Board extends BoardHelper {
                         Thread.sleep(2000);
                     } catch (InterruptedException ignored) {
                     }
-                    for (Ghost ghostValue : ghosts) {
-                        ghostValue.reset();
+                    for (Ghost value : ghosts) {
+                        value.reset();
                     }
                     pacman.kill();
                     return;
@@ -43,6 +43,12 @@ public class Board extends BoardHelper {
     }
 
     public void movePacman() {
+        if (!Ghost.isSCARED()) {
+            for (Ghost ghost : ghosts) {
+                if (pacman.isNextTo(ghost))
+                    return;
+            }
+        }
         Point newPacLocation = new Point(
                 pacman.getLocation().x + pacman.getNewDirection().x,
                 pacman.getLocation().y + pacman.getNewDirection().y
@@ -53,17 +59,12 @@ public class Board extends BoardHelper {
         );
         adjustToMap(newPacLocation);
         adjustToMap(curPacLocation);
-        if (border.collision(newPacLocation))
-            newPacLocation = null;
-        if (border.collision(curPacLocation))
-            curPacLocation = null;
-        if (newPacLocation != null) {
+        if (!border.collision(newPacLocation)) {
             pacman.setCurrentDirection(pacman.getNewDirection());
             curPacLocation = newPacLocation;
         }
-        if (curPacLocation != null) {
+        if (!border.collision(curPacLocation))
             pacman.setLocation(curPacLocation);
-        }
     }
 
     public void moveGhosts() {

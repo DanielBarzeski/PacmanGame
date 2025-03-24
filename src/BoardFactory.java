@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class BoardFactory extends BoardMap {
 
@@ -8,15 +10,21 @@ public class BoardFactory extends BoardMap {
 
     public void drawGame(Graphics g) {
         food.draw(g);
-        drawGhosts(g);
-        pacman.draw(g);
+        if (Ghost.isSCARED()){
+            drawGhosts(g);
+            pacman.draw(g);
+        } else {
+            pacman.draw(g);
+            drawGhosts(g);
+        }
         border.draw(g);
         if (Game.isFINISHED()) {
-            Rectangle r = new Rectangle(Game.getWIDTH() / 2 - 50, Game.getHEIGHT() / 2 - 60, 100, 100);
+            BufferedImage b;
             if (Game.isWON())
-                g.drawImage(Picture.WINNING, r.x, r.y, r.width, r.height, null);
+                b = Picture.WINNING;
             else
-                g.drawImage(Picture.LOSING, r.x, r.y, r.width, r.height, null);
+                b = Picture.LOSING;
+            g.drawImage(b, GameDisplay.getWIDTH() / 2 - 50, GameDisplay.getHEIGHT() / 2 - 60, 100, 100, null);
         }
     }
 
@@ -34,14 +42,19 @@ public class BoardFactory extends BoardMap {
 
     public void drawMenu(Graphics g) {
         g.setColor(Color.yellow);
-        g.fillRoundRect(320, 5, 165, 30, 10, 10);
+        g.fillRoundRect(400, 5, 165, 30, 10, 10);
+        g.setColor(Color.magenta);
+        g.fillRoundRect(300, 5, 80, 30, 10, 10);
         g.setColor(Color.black);
-        g.drawString("Score: " + food.getScore(), 323, 20);
-        if (Ghost.getScaredTime() >= 0)
-            g.drawString("Scared for: " + Ghost.getScaredTime() + "s", 385, 20);
-        int x = 505;
+        g.drawString("Level " + Game.getLEVEL(), 320, 25);
+        g.drawString("Score: " + food.getScore(), 415, 25);
+        if (Ghost.getScaredTime() >= 0) {
+            g.drawImage(Objects.requireNonNull(Picture.GHOST_SCARED_BLUE).getSubimage(0, 0, 16, 16),
+                    492, 10, 20, 20, null);
+            g.drawString(" -> " + Ghost.getScaredTime() + "s", 512, 25);
+        }
         for (int i = 0; i < pacman.getLife(); i++) {
-            g.drawImage(Picture.HEART, x + 24 * i, 7, 20, 20, null);
+            g.drawImage(Picture.HEART, 585 + 24 * i, 7, 20, 20, null);
         }
     }
 }

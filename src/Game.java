@@ -6,13 +6,13 @@ import java.util.ArrayList;
 public class Game {
     private static boolean FINISHED, PAUSED, WON;
     public static final int CELL_SIZE = 17;
-    private static int WIDTH, HEIGHT, LEVEL; // max 4
+    private static int LEVEL; // max 4
     private static Board BOARD;
 
     public static void START() {
         byte[][] map = readByteArrayFromFile();
-        WIDTH = map[0].length * CELL_SIZE;
-        HEIGHT = map.length * CELL_SIZE;
+        GameDisplay.setWIDTH(map[0].length * CELL_SIZE);
+        GameDisplay.setHEIGHT(map.length * CELL_SIZE);
         BOARD = new Board(map);
         PAUSED = false;
         FINISHED = false;
@@ -28,6 +28,26 @@ public class Game {
         FINISHED = true;
         System.out.println("THE GAME IS FINISHED!");
         SoundManager.stopBackgroundMusic();
+    }
+
+    private static byte[][] readByteArrayFromFile() {
+        ArrayList<byte[]> lines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("levels/level_" + LEVEL))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line.getBytes());
+            }
+        } catch (IOException e) {
+            LEVEL = 0;
+            return readByteArrayFromFile();
+        }
+
+        byte[][] byteArray = new byte[lines.size()][];
+        for (int i = 0; i < lines.size(); i++) {
+            byteArray[i] = lines.get(i);
+        }
+
+        return byteArray;
     }
 
     public static void PAUSE() {
@@ -50,36 +70,8 @@ public class Game {
         return PAUSED;
     }
 
-    public static Board CONTROL_BOARD() {
+    public static Board board() {
         return BOARD;
-    }
-
-    private static byte[][] readByteArrayFromFile() {
-        ArrayList<byte[]> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("levels/level_" + LEVEL))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line.getBytes());
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading file: " + "levels/level_" + LEVEL);
-            System.exit(0);
-        }
-
-        byte[][] byteArray = new byte[lines.size()][];
-        for (int i = 0; i < lines.size(); i++) {
-            byteArray[i] = lines.get(i);
-        }
-
-        return byteArray;
-    }
-
-    public static int getWIDTH() {
-        return WIDTH;
-    }
-
-    public static int getHEIGHT() {
-        return HEIGHT;
     }
 
     public static int getLEVEL() {
@@ -87,7 +79,6 @@ public class Game {
     }
 
     public static void setLEVEL(int level) {
-        if (level >= 0 && level <= 4)
-            Game.LEVEL = level;
+        Game.LEVEL = level;
     }
 }

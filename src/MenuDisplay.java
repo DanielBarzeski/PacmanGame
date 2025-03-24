@@ -18,6 +18,7 @@ public class MenuDisplay extends JPanel {
         });
         JButton restart = new JButton("restart");
         restart.setBackground(Color.orange);
+        restart.setFocusable(false);
         restart.addActionListener(e -> {
             Game.START();
             pause.setVisible(true);
@@ -25,12 +26,14 @@ public class MenuDisplay extends JPanel {
             repaint();
         });
         JButton last = new JButton("last");
+        last.setFocusable(false);
         last.setBackground(Color.orange);
         last.addActionListener(e -> {
             Game.setLEVEL(Game.getLEVEL() - 1);
             restart.doClick();
         });
         JButton next = new JButton("next");
+        next.setFocusable(false);
         next.setBackground(Color.orange);
         next.addActionListener(e -> {
             Game.setLEVEL(Game.getLEVEL() + 1);
@@ -46,7 +49,7 @@ public class MenuDisplay extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Game.CONTROL_BOARD().drawMenu(g);
+        Game.board().drawMenu(g);
     }
 
     public void run() {

@@ -25,10 +25,10 @@ public class MenuDisplay extends JPanel {
             revalidate();
             repaint();
         });
-        JButton last = new JButton("last");
-        last.setFocusable(false);
-        last.setBackground(Color.orange);
-        last.addActionListener(e -> {
+        JButton previous = new JButton("prev");
+        previous.setFocusable(false);
+        previous.setBackground(Color.orange);
+        previous.addActionListener(e -> {
             Game.setLEVEL(Game.getLEVEL() - 1);
             restart.doClick();
         });
@@ -40,7 +40,7 @@ public class MenuDisplay extends JPanel {
             restart.doClick();
         });
         add(restart);
-        add(last);
+        add(previous);
         add(next);
         add(pause);
         run();

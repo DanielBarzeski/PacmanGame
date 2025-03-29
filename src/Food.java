@@ -41,7 +41,7 @@ public class Food {
         for (int i = 0; i < cherries.size(); i++) {
             Point cherry = cherries.get(i);
             if (pacman.getLocation().equals(cherry)) {
-                Ghost.setScaredTime(Ghost.getScaredTime() + 11);
+                Ghost.setScaredTimer(Ghost.getScaredTime() + 11);
                 if (timer == null) {
                     timer = getTimer();
                     timer.start();
@@ -63,7 +63,7 @@ public class Food {
                 } catch (InterruptedException ignored) {
                 }
                 if (!Game.isPAUSED())
-                    Ghost.setScaredTime(Ghost.getScaredTime() - 1);
+                    Ghost.setScaredTimer(Ghost.getScaredTime() - 1);
             }
             Ghost.setSCARED(false);
             timer = null;

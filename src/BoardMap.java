@@ -14,6 +14,8 @@ public class BoardMap {
         this.ghosts = new ArrayList<>();
         this.food = new Food();
         Point point = new Point();
+        Ghost.setScaredTimer(-1);
+        Ghost.setSCARED(false);
         scanMap(point);
         this.pacman = new Pacman(point.x, point.y);
     }

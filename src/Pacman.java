@@ -19,6 +19,12 @@ public class Pacman extends Character {
         stay();
     }
 
+    public boolean isNextTo(Ghost ghost) {
+        int dx = Math.abs(ghost.getLocation().x - getLocation().x);
+        int dy = Math.abs(ghost.getLocation().y - getLocation().y);
+        return dx + dy == 1;
+    }
+
     public void draw(Graphics g) {
         spriteBounds.x += 16;
         if (spriteBounds.x == getSprite().getWidth())
@@ -61,22 +67,16 @@ public class Pacman extends Character {
         newDirection = new Point(1, 0);
     }
 
+    public boolean collision(Ghost ghost) {
+        return getLocation().equals(ghost.getLocation());
+    }
+
     public Point getNewDirection() {
         return newDirection;
     }
 
     public int getLife() {
         return life;
-    }
-
-    public boolean isNextTo(Ghost ghost) {
-        int dx = Math.abs(ghost.getLocation().x - getLocation().x);
-        int dy = Math.abs(ghost.getLocation().y - getLocation().y);
-        return dx + dy == 1;
-    }
-
-    public boolean collision(Ghost ghost) {
-        return getLocation().equals(ghost.getLocation());
     }
 }
 

@@ -11,6 +11,33 @@ public class GameDisplay extends JPanel {
         setupKeyBindings();
     }
 
+    public void run() {
+        final int[] counter = {0, 0};
+        new Timer(80, e -> {
+            update(counter);
+            repaint();
+        }).start();
+    }
+
+    private void update(int[] counter) {
+        if (!Game.isFINISHED() && !Game.isPAUSED()) {
+            setPreferredSize(new Dimension(WIDTH, HEIGHT));
+            revalidate();
+            Game.board().updateRules();
+            if (counter[0] == 4) {
+                Game.board().updateFood();
+                Game.board().movePacman();
+                counter[0] = 0;
+            }
+            if (counter[1] == 7) {
+                Game.board().moveGhosts();
+                counter[1] = 0;
+            }
+            counter[0]++;
+            counter[1]++;
+        }
+    }
+
     private void setupKeyBindings() {
         InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap actionMap = getActionMap();
@@ -42,31 +69,6 @@ public class GameDisplay extends JPanel {
         Game.board().drawGame(g);
     }
 
-    public void run() {
-        final int[] counter = {0, 0};
-        new Timer(80, e -> {
-            update(counter);
-            repaint();
-        }).start();
-    }
-    private void update(int[] counter){
-        if (!Game.isFINISHED() && !Game.isPAUSED()) {
-            setPreferredSize(new Dimension(WIDTH, HEIGHT));
-            revalidate();
-            Game.board().updateRules();
-            if (counter[0] == 4) {
-                Game.board().updateFood();
-                Game.board().movePacman();
-                counter[0] = 0;
-            }
-            if (counter[1] == 7) {
-                Game.board().moveGhosts();
-                counter[1] = 0;
-            }
-            counter[0]++;
-            counter[1]++;
-        }
-    }
     public static int getWIDTH() {
         return WIDTH;
     }

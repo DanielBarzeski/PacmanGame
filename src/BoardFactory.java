@@ -28,7 +28,7 @@ public class BoardFactory extends BoardMap {
         }
     }
 
-    protected void drawGhosts(Graphics g) {
+    private void drawGhosts(Graphics g) {
         for (Ghost ghost : ghosts) {
             if (!Ghost.isSCARED())
                 ghost.changeSprite(Picture.GHOST, true);

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Game {
     private static boolean FINISHED, PAUSED, WON;
     public static final int CELL_SIZE = 17;
-    private static int LEVEL; // max 4
+    private static int LEVEL;
     private static Board BOARD;
 
     public static void START() {

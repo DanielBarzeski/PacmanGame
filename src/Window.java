@@ -12,7 +12,11 @@ public class Window extends JFrame {
         setAlwaysOnTop(true);
         JPanel display = new JPanel();
         display.setBackground(Color.blue.darker().darker());
-        display.setPreferredSize(new Dimension(750, 590));
+        new Timer(100,e->
+                display.setPreferredSize(new Dimension(
+                        Math.max(GameDisplay.getWIDTH(),690)+10,
+                        GameDisplay.getHEIGHT()+55))
+        ).start();
         display.setLayout(new FlowLayout());
         Game.setLEVEL(2);
         Game.START();

@@ -3,12 +3,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Ghost extends Character {
-    private BufferedImage sprite;
     private static final Color[] COLORS = new Color[]{
             Color.orange, Color.green, Color.magenta, Color.cyan, Color.pink,
             Color.red.darker(), Color.green.darker(), Color.magenta.darker(), Color.cyan.darker(),
     };
     private final Color color;
+    private BufferedImage sprite;
     private static int SCARED_TIME, INDEX;
     private static boolean SCARED;
 

@@ -25,7 +25,19 @@ public class Pacman extends Character {
         return dx + dy == 1;
     }
 
+    public boolean collision(Ghost ghost) {
+        return getLocation().equals(ghost.getLocation());
+    }
+
     public void draw(Graphics g) {
+        updateBounds();
+        g.drawImage(getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
+                getLocation().x * Game.CELL_SIZE, getLocation().y * Game.CELL_SIZE,
+                Game.CELL_SIZE + 1, Game.CELL_SIZE + 1, null);
+
+    }
+
+    private void updateBounds() {
         spriteBounds.x += 16;
         if (spriteBounds.x == getSprite().getWidth())
             spriteBounds.x = 0;
@@ -40,10 +52,6 @@ public class Pacman extends Character {
             spriteBounds.y = 32;
         else if (getCurrentDirection().x == -1)
             spriteBounds.y = 48;
-        g.drawImage(getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
-                getLocation().x * Game.CELL_SIZE, getLocation().y * Game.CELL_SIZE,
-                Game.CELL_SIZE + 1, Game.CELL_SIZE + 1, null);
-
     }
 
     public void stay() {
@@ -65,10 +73,6 @@ public class Pacman extends Character {
 
     public void goRight() {
         newDirection = new Point(1, 0);
-    }
-
-    public boolean collision(Ghost ghost) {
-        return getLocation().equals(ghost.getLocation());
     }
 
     public Point getNewDirection() {

@@ -14,7 +14,6 @@ public class Board extends BoardHelper {
             Game.END(true);
             return;
         }
-        pacman.run();
         for (int i = 0; i < ghosts.size(); i++) {
             Ghost ghost = ghosts.get(i);
             if (ghost.collision(pacman)) {
@@ -43,6 +42,7 @@ public class Board extends BoardHelper {
     }
 
     public void movePacman() {
+        pacman.run();
         if (!Ghost.isSCARED()) {
             for (Ghost ghost : ghosts) {
                 if (pacman.isNextTo(ghost))

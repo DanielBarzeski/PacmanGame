@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Pacman extends Character {
+public class Pacman extends GameCharacter {
     private Point newDirection;
     private int life;
 
@@ -31,7 +31,9 @@ public class Pacman extends Character {
 
     public void draw(Graphics g) {
         updateBounds();
-        g.drawImage(getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.drawImage(getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
                 getLocation().x * Game.CELL_SIZE, getLocation().y * Game.CELL_SIZE,
                 Game.CELL_SIZE + 1, Game.CELL_SIZE + 1, null);
 

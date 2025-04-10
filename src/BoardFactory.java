@@ -10,7 +10,7 @@ public class BoardFactory extends BoardMap {
 
     public void drawGame(Graphics g) {
         food.draw(g);
-        if (Ghost.isSCARED()){
+        if (Ghost.isSCARED()) {
             drawGhosts(g);
             pacman.draw(g);
         } else {

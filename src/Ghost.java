@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Ghost extends Character {
+public class Ghost extends GameCharacter {
     private static final Color[] COLORS = new Color[]{
             Color.orange, Color.green, Color.magenta, Color.cyan, Color.pink,
             Color.red.darker(), Color.green.darker(), Color.magenta.darker(), Color.cyan.darker(),
@@ -64,15 +64,16 @@ public class Ghost extends Character {
         return false;
     }
 
-    public boolean collision(Character other) {
-        return getLocation().equals(other.getLocation());
-    }
-
     public void draw(Graphics g) {
         updateBounds();
-        g.drawImage(getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.drawImage(
+                getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
                 getLocation().x * Game.CELL_SIZE, getLocation().y * Game.CELL_SIZE,
-                Game.CELL_SIZE, Game.CELL_SIZE, null);
+                Game.CELL_SIZE, Game.CELL_SIZE,
+                null
+        );
     }
 
     private void updateBounds() {

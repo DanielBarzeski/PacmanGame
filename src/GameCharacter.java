@@ -1,14 +1,14 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Character {
+public class GameCharacter {
     private boolean run;
     private final Point startPoint;
     private Point location, currentDirection;
     private BufferedImage sprite;
     protected final Rectangle spriteBounds;
 
-    public Character(int startX, int startY) {
+    public GameCharacter(int startX, int startY) {
         this.startPoint = new Point(startX, startY);
         this.location = new Point(startX, startY);
         this.currentDirection = new Point();

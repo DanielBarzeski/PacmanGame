@@ -16,7 +16,7 @@ public class Food {
     public void draw(Graphics g) {
         for (Point apple : apples) {
             g.drawImage(Picture.APPLE, apple.x * Game.CELL_SIZE + Game.CELL_SIZE / 4,
-                    apple.y * Game.CELL_SIZE + Game.CELL_SIZE / 4,
+                    apple.y * Game.CELL_SIZE + Game.CELL_SIZE / 4 ,
                     Game.CELL_SIZE / 2 + 1, Game.CELL_SIZE / 2 + 1, null
             );
         }

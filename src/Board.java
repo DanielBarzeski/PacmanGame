@@ -16,7 +16,7 @@ public class Board extends BoardHelper {
         }
         for (int i = 0; i < ghosts.size(); i++) {
             Ghost ghost = ghosts.get(i);
-            if (ghost.collision(pacman)) {
+            if (pacman.collision(ghost)) {
                 if (Ghost.isSCARED()) {
                     ghost.kill();
                     food.addToScore(20);
@@ -45,7 +45,7 @@ public class Board extends BoardHelper {
         pacman.run();
         if (!Ghost.isSCARED()) {
             for (Ghost ghost : ghosts) {
-                if (pacman.isNextTo(ghost))
+                if (pacman.isNextTo(ghost) || pacman.collision(ghost))
                     return;
             }
         }

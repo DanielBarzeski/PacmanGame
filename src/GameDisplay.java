@@ -24,13 +24,13 @@ public class GameDisplay extends JPanel {
             setPreferredSize(new Dimension(WIDTH, HEIGHT));
             revalidate();
             Game.board().updateRules();
-            if (counter[0] == 4) {
+            if (counter[0] == 7) {
+                Game.board().moveGhosts();
+                counter[0] = 0;
+                }
+            if (counter[1] == 4) {
                 Game.board().updateFood();
                 Game.board().movePacman();
-                counter[0] = 0;
-            }
-            if (counter[1] == 7) {
-                Game.board().moveGhosts();
                 counter[1] = 0;
             }
             counter[0]++;
@@ -62,7 +62,6 @@ public class GameDisplay extends JPanel {
             });
         }
     }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

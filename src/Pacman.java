@@ -32,7 +32,9 @@ public class Pacman extends GameCharacter {
         update();
         g.drawImage(getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
                 getLocation().x * Game.CELL_SIZE, getLocation().y * Game.CELL_SIZE,
-                Game.CELL_SIZE + 1, Game.CELL_SIZE + 1, null);
+                Game.CELL_SIZE + Game.CELL_SIZE / 16,
+                Game.CELL_SIZE + Game.CELL_SIZE / 16, null
+        );
     }
 
     private void update() {

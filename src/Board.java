@@ -36,7 +36,7 @@ public class Board extends BoardHelper {
                     var ref = new Object() {
                         Thread thread = new Thread(() -> {
                             try {
-                                Thread.sleep(2000);
+                                Thread.sleep(2200);
                             } catch (InterruptedException ignored) {
                             }
                             for (Ghost value : ghosts) {
@@ -61,7 +61,7 @@ public class Board extends BoardHelper {
     public void movePacman() {
         if (!Ghost.isSCARED()) {
             for (Ghost ghost : ghosts) {
-                if (!ghost.isDelay() && (pacman.isNextTo(ghost) || pacman.collision(ghost)))
+                if ((pacman.isNextTo(ghost)) || pacman.collision(ghost))
                     return;
             }
         }
@@ -84,19 +84,23 @@ public class Board extends BoardHelper {
 
     public void moveGhosts() {
         if (!pacman.isStaying()) {
-            for (Ghost ghost : ghosts) {
-                moveGhost(ghost);
+            if (Ghost.getDELAY() == 7) {
+                for (Ghost ghost : ghosts) {
+                    moveGhost(ghost);
+                }
             }
+            Ghost.setDELAY(Ghost.getDELAY() + 1);
+            if (Ghost.getDELAY() > 7) Ghost.setDELAY(0);
         }
     }
 
     private void moveGhost(Ghost ghost) {
-        if (!ghost.isDelay() && !ghost.isKilled()) go(ghost);
-        else ghost.stay();
-        ghost.setLocation(new Point(
-                ghost.getLocation().x + ghost.getCurrentDirection().x,
-                ghost.getLocation().y + ghost.getCurrentDirection().y)
-        );
-        ghost.setDelay(!ghost.isDelay());
+        if (!ghost.isKilled()) {
+            go(ghost);
+            ghost.setLocation(new Point(
+                    ghost.getLocation().x + ghost.getCurrentDirection().x,
+                    ghost.getLocation().y + ghost.getCurrentDirection().y)
+            );
+        }
     }
 }

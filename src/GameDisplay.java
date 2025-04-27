@@ -26,8 +26,7 @@ public class GameDisplay extends JPanel {
             setPreferredSize(new Dimension(WIDTH, HEIGHT));
             revalidate();
             Game.board().updateRules();
-            if (counter[0] == 2)
-                Game.board().moveGhosts();
+            Game.board().moveGhosts();
             if (counter[0] == 4) {
                 Game.board().updateFood();
                 Game.board().movePacman();

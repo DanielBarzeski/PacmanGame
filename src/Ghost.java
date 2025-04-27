@@ -8,16 +8,14 @@ public class Ghost extends GameCharacter {
             Color.pink, Color.green.darker(), Color.magenta.darker(), Color.cyan.darker(),
     };
     private final Color color;
-    private Boolean delay;
     private boolean killed;
     private BufferedImage tempSprite;
-    private static int SCARED_TIME, INDEX;
+    private static int SCARED_TIME, INDEX, DELAY;
     private static boolean SCARED;
 
     public Ghost(int startX, int startY) {
         super(startX, startY);
         this.color = COLORS[INDEX++ % COLORS.length];
-        this.delay = false;
         this.killed = false;
         this.tempSprite = null;
         changeSprite(Picture.GHOST);
@@ -52,12 +50,10 @@ public class Ghost extends GameCharacter {
 
     public void draw(Graphics g) {
         updateBounds();
-        int delayX = getCurrentDirection().x * Game.CELL_SIZE / 2 * (isDelay().hashCode() / Boolean.hashCode(true));
-        int delayY = getCurrentDirection().y * Game.CELL_SIZE / 2 * (isDelay().hashCode() / Boolean.hashCode(true));
         g.drawImage(
                 getSprite().getSubimage(spriteBounds.x, spriteBounds.y, spriteBounds.width, spriteBounds.height),
-                getLocation().x * Game.CELL_SIZE - delayX,
-                getLocation().y * Game.CELL_SIZE - delayY,
+                getLocation().x * Game.CELL_SIZE + (DELAY - 7) * getCurrentDirection().x * Game.CELL_SIZE / 8,
+                getLocation().y * Game.CELL_SIZE + (DELAY - 7) * getCurrentDirection().y * Game.CELL_SIZE / 8,
                 Game.CELL_SIZE, Game.CELL_SIZE,
                 null
         );
@@ -93,13 +89,12 @@ public class Ghost extends GameCharacter {
     public static void setScaredTimer(int scaredTime) {
         SCARED_TIME = scaredTime;
     }
-
-    public Boolean isDelay() {
-        return delay;
+    public static int getDELAY() {
+        return DELAY;
     }
 
-    public void setDelay(Boolean delay) {
-        this.delay = delay;
+    public static void setDELAY(int DELAY) {
+        Ghost.DELAY = DELAY;
     }
 
     public static boolean isSCARED() {

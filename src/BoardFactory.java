@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 public class BoardFactory extends BoardMap {

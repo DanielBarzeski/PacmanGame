@@ -19,20 +19,18 @@ public class BoardFactory extends BoardMap {
         }
         walls.draw(g);
         if (Game.isFINISHED()) {
-            BufferedImage b;
-            if (Game.isWON())
-                b = Picture.WINNING;
-            else
-                b = Picture.LOSING;
-            g.drawImage(b, GameDisplay.getWIDTH() / 2 - 50, GameDisplay.getHEIGHT() / 2 - 60, 100, 100, null);
+            g.drawImage(Game.isWON() ? Picture.WINNING : Picture.LOSING,
+                    GameDisplay.getWIDTH() / 2 - 50, GameDisplay.getHEIGHT() / 2 - 60,
+                    100, 100, null
+            );
         }
     }
 
     private void drawGhosts(Graphics g) {
         for (Ghost ghost : ghosts) {
-            if (!Ghost.isSCARED()) {
+            if (!Ghost.isSCARED())
                 ghost.changeSprite(Picture.GHOST);
-            } else if (pacman.isNextTo(ghost) || pacman.collision(ghost))
+            else if (pacman.isNextTo(ghost) || pacman.collision(ghost))
                 ghost.changeSprite(Picture.GHOST_SCARED_WHITE);
             else
                 ghost.changeSprite(Picture.GHOST_SCARED_BLUE);

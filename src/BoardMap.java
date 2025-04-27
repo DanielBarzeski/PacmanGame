@@ -23,17 +23,17 @@ public class BoardMap {
     private void scanMap(Point point) {
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map[0].length; col++) {
-                if (map[row][col] == '0')      // every zero represent an apple.
+                if (map[row][col] == '0')      // every 0 represent an apple.
                     food.apples.add(new Point(col, row));
-                else if (map[row][col] == '1') // every one represent a walls.
+                else if (map[row][col] == '1') // every 1 represent a wall.
                     walls.add(new Point(col, row));
-                else if (map[row][col] == '2') // every two represent a ghost.
+                else if (map[row][col] == '2') // every 2 represent a ghost.
                     ghosts.add(new Ghost(col, row));
-                else if (map[row][col] == '4') // four represent a pacman.
+                else if (map[row][col] == '4') // 4 represent a pacman.
                     point.move(col, row);
-                else if (map[row][col] == '5') // every five represent a cherry.
+                else if (map[row][col] == '5') // every 5 represent a cherry.
                     food.cherries.add(new Point(col, row));
-                // every three represent nothing.
+                // every 3 represent nothing.
             }
         }
     }

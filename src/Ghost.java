@@ -18,7 +18,6 @@ public class Ghost extends GameCharacter {
         this.color = COLORS[INDEX++ % COLORS.length];
         this.killed = false;
         this.tempSprite = null;
-        changeSprite(Picture.GHOST);
     }
 
     public void changeSprite(BufferedImage sprite) {

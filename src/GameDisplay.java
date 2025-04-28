@@ -13,7 +13,7 @@ public class GameDisplay extends JPanel {
 
     public void run() {
         final int[] counter = {0};
-        new Timer(80, _ -> {
+        new Timer(70, _ -> {
             if (Game.board().isUpdating()) {
                 update(counter);
                 repaint();

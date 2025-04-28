@@ -33,21 +33,17 @@ public class Board extends BoardHelper {
                     SoundManager.playEatingPacmanSound();
                     pacman.spriteBounds.x = 48;
                     update = false;
-                    var ref = new Object() {
-                        Thread thread = new Thread(() -> {
-                            try {
-                                Thread.sleep(2200);
-                            } catch (InterruptedException ignored) {
-                            }
-                            for (Ghost value : ghosts) {
-                                value.reset();
-                            }
-                            pacman.kill();
-                            update = true;
-                            thread = null;
-                        });
-                    };
-                    ref.thread.start();
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(2200);
+                        } catch (InterruptedException ignored) {
+                        }
+                        for (Ghost value : ghosts) {
+                            value.reset();
+                        }
+                        pacman.kill();
+                        update = true;
+                    }).start();
                     return;
                 }
             }

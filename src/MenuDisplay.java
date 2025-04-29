@@ -20,7 +20,7 @@ public class MenuDisplay extends JPanel {
         restart.setBackground(Color.orange);
         restart.setFocusable(false);
         restart.addActionListener(_ -> {
-            Game.START();
+            Game.RESTART();
             pause.setVisible(true);
             revalidate();
             repaint();
@@ -58,8 +58,10 @@ public class MenuDisplay extends JPanel {
                 pause.setVisible(false);
             else if (Game.isPAUSED()) {
                 pause.setText("continue");
+                pause.requestFocusInWindow();
             } else {
                 pause.setText("pause");
+                pause.requestFocusInWindow();
             }
             repaint();
         }).start();

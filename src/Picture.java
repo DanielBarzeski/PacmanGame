@@ -21,7 +21,8 @@ public class Picture {
         try {
             return ImageIO.read(new File("images/" + pathname + ".png"));
         } catch (IOException e) {
-            return null;
+            System.out.println("Image " + pathname + ".png does not exist.");
+            return new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
         }
     }
 

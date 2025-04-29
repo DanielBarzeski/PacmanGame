@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.Objects;
 
 public class BoardFactory extends BoardMap {
 
@@ -46,7 +45,7 @@ public class BoardFactory extends BoardMap {
         g.drawString("Level " + Game.getLEVEL(), 320, 25);
         g.drawString("Score: " + food.getScore(), 415, 25);
         if (Ghost.getScaredTime() >= 0) {
-            g.drawImage(Objects.requireNonNull(Picture.GHOST_SCARED_BLUE).getSubimage(0, 0, 16, 16),
+            g.drawImage(Picture.GHOST_SCARED_BLUE.getSubimage(0, 0, 16, 16),
                     492, 10, 20, 20, null);
             g.drawString(" -> " + Ghost.getScaredTime() + "s", 512, 25);
         }

@@ -12,27 +12,29 @@ public class GameDisplay extends JPanel {
     }
 
     public void run() {
-        final int[] counter = {0};
+        final int[] timeCounter = {0};
         new Timer(70, _ -> {
             if (Game.board().isUpdating()) {
-                update(counter);
+                update(timeCounter);
                 repaint();
             }
         }).start();
     }
 
-    private void update(int[] counter) {
+    private void update(int[] timeCounter) {
         if (!Game.isFINISHED() && !Game.isPAUSED()) {
             setPreferredSize(new Dimension(WIDTH, HEIGHT));
             revalidate();
             Game.board().updateRules();
             Game.board().moveGhosts();
-            if (counter[0] == 4) {
-                Game.board().updateFood();
-                Game.board().movePacman();
-                counter[0] = 0;
+            if (timeCounter[0] == 4) {
+                if (Game.board().isUpdating()) {
+                    Game.board().updateFood();
+                    Game.board().movePacman();
+                }
+                timeCounter[0] = 0;
             }
-            counter[0]++;
+            timeCounter[0]++;
         }
     }
 

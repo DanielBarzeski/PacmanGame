@@ -35,7 +35,7 @@ public class Food {
                 apples.remove(apple);
                 addToScore(10);
                 SoundManager.playEatingAppleSound();
-                i--;
+                return;
             }
         }
         for (int i = 0; i < cherries.size(); i++) {
@@ -50,7 +50,7 @@ public class Food {
                 cherries.remove(cherry);
                 addToScore(30);
                 SoundManager.playEatingCherrySound();
-                i--;
+                return;
             }
         }
     }

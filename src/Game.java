@@ -17,9 +17,15 @@ public class Game {
         PAUSED = false;
         FINISHED = false;
         WON = false;
+    }
+
+    public static void RESTART() {
+        if (FINISHED) {
+            SoundManager.rewindBackgroundSound();
+            SoundManager.playBackgroundSound();
+        }
+        START();
         System.out.println("THE GAME HAS STARTED!");
-        SoundManager.rewindBackgroundSound();
-        SoundManager.playBackgroundSound();
     }
 
     public static void END(boolean winning) {

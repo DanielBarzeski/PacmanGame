@@ -55,6 +55,12 @@ public class Board extends BoardHelper {
     }
 
     public void movePacman() {
+        if (!Ghost.isSCARED()){
+            for (Ghost ghost : ghosts) {
+                if (pacman.isNextTo(ghost) || pacman.collision(ghost))
+                    return;
+            }
+        }
         Point newPacLocation = new Point(
                 pacman.getLocation().x + pacman.getNewDirection().x,
                 pacman.getLocation().y + pacman.getNewDirection().y

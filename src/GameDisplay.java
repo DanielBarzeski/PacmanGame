@@ -28,10 +28,8 @@ public class GameDisplay extends JPanel {
             Game.board().updateRules();
             Game.board().moveGhosts();
             if (timeCounter[0] == 4) {
-                if (Game.board().isUpdating()) {
-                    Game.board().updateFood();
-                    Game.board().movePacman();
-                }
+                Game.board().updateFood();
+                Game.board().movePacman();
                 timeCounter[0] = 0;
             }
             timeCounter[0]++;
